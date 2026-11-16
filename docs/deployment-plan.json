@@ -1,0 +1,34 @@
+{
+  "lesson": 19,
+  "checkpoint": "Students can distinguish the local starter from a deployed service.",
+  "implementedInStarter": ["typed product tools", "repository tenant and editor checks", "exact-call CLI approval", "atomic mutation, audit and receipt", "per-run CLI bounds"],
+  "referenceExamplesTested": ["server-owned context policy", "approval ownership and freshness policy", "exact restored-call matching", "actual SDK state serialization round trip", "conditional decision and outbox SQL"],
+  "serviceAdaptersStillRequired": ["real identity provider verification", "authenticated tenant membership lookup", "conversation ownership storage", "CSRF or equivalent transport protections", "encrypted durable SDK state store", "outbox delivery and worker leases", "distributed limits and budget reservation", "deployment secrets, TLS, logging, backups and retention"],
+  "authenticationContract": {
+    "verify": ["signature and trusted issuer", "audience", "expiration", "session revocation"],
+    "loadFromServer": ["active workspace membership", "current reader/editor role", "owned conversation"],
+    "ignoreAsAuthority": ["prompt identity claims", "request-body tenant or role", "model tool identity fields"],
+    "requestId": "Mint on admission; persist original value through decisions and resume."
+  },
+  "durableStateContract": {
+    "store": ["original trusted context", "owner tenant, actor, session and conversation", "exact interruption call ID, tool and arguments", "SDK version and agent revision", "expiry and expected revision", "encrypted SDK RunState and encryption key reference"],
+    "protection": "Use authenticated encryption with identity/proposal metadata as associated data; restrict access, bound payload size, redact secrets and apply retention. Never deserialize browser-supplied SDK state.",
+    "restore": "Reconstruct the same agent/tool recipe, decrypt trusted storage, restore SDK RunState, and verify the exact pending item before applying its stored decision."
+  },
+  "workerRecovery": {
+    "decision": "Fresh authorization plus revision CAS; decision and outbox commit atomically.",
+    "claim": "One lease and fencing token per job; revalidate current membership, session, recipe and expiry before execution.",
+    "authorizationRace": "Define and implement transaction-time authorization/revocation semantics; the existing repository role flag alone does not reload current membership.",
+    "resume": "Apply approve/reject to the exact restored interruption and preserve original request context.",
+    "crashAfterCommit": "Reconcile operation receipts and audit evidence before redelivery; a queue lease alone does not prevent duplicate effects.",
+    "unknownOutcome": "Persist unknown status and investigate; deadline or cancellation does not undo a prior commit."
+  },
+  "operationalLimits": {
+    "existing": "8 turns per Runner invocation, 8 approval rounds, 4000 input characters, 120 history items; pool max 5 with bounded SQL timeouts.",
+    "serverDesign": "Atomic shared admission for rate, tenant concurrency, queue size and token/cost budgets. Add cumulative model-call budgets across resumes, deadlines, cancellation and state-size limits.",
+    "capacity": "Proposed numeric values are teaching examples. Size per-worker pools and aggregate service concurrency against measured database/provider capacity."
+  },
+  "realPostgresTestsExecuted": ["runtime grants reject DDL, physical deletion and audit reads", "two stale-version competitors yield one commit and one conflict", "concurrent exact replay yields one stored mutation", "audit failure rolls back and releases reusable clients", "repository tenant scope and archived evidence", "competing approval decisions yield one decision and outbox row"],
+  "deploymentIntegrationTestsStillRequired": ["real token verification, expiry, revocation and CSRF", "HTTP tenant/conversation/approval ownership checks", "membership revocation before resume and authorization race semantics", "encrypted storage tamper rejection and key rotation", "multi-worker lease expiry, stale fencing and restart recovery", "crash after mutation commit before job completion", "distributed quota exhaustion and cancellation after commit", "actual TLS, deployed secrets and deployed database grants", "backup/restore and retention behavior", "RLS policies if enabled; no RLS is configured in the starter"],
+  "releaseGate": "Keep each unimplemented adapter and unrun integration test visible. A passing local suite is not evidence of a deployed authenticated service."
+}

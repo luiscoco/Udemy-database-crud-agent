@@ -1,0 +1,26 @@
+# Lecture guides
+
+These guides use the completed reference application at the repository root. Run commands there, rather than expecting a separate database-crud-agent folder inside each guide. Historical application evidence and per-archive validation reports are supplied separately in the Udemy downloads.
+
+- [Lecture-01-welcome-and-overview](Lecture-01-welcome-and-overview/LESSON-GUIDE.md)
+- [Lecture-02-github-repo](Lecture-02-github-repo/LESSON-GUIDE.md)
+- [Lecture-03-define-the-agent-s-business-contract](Lecture-03-define-the-agent-s-business-contract/LESSON-GUIDE.md)
+- [Lecture-04-prepare-the-development-environment](Lecture-04-prepare-the-development-environment/LESSON-GUIDE.md)
+- [Lecture-05-design-the-database](Lecture-05-design-the-database/LESSON-GUIDE.md)
+- [Lecture-06-retrieve-one-product](Lecture-06-retrieve-one-product/LESSON-GUIDE.md)
+- [Lecture-07-search-and-paginate](Lecture-07-search-and-paginate/LESSON-GUIDE.md)
+- [Lecture-08-create-with-audit-and-replay-handling](Lecture-08-create-with-audit-and-replay-handling/LESSON-GUIDE.md)
+- [Lecture-09-update-and-archive-with-version-checks](Lecture-09-update-and-archive-with-version-checks/LESSON-GUIDE.md)
+- [Lecture-10-supply-trusted-application-context](Lecture-10-supply-trusted-application-context/LESSON-GUIDE.md)
+- [Lecture-11-expose-the-read-tools](Lecture-11-expose-the-read-tools/LESSON-GUIDE.md)
+- [Lecture-12-expose-the-write-tools](Lecture-12-expose-the-write-tools/LESSON-GUIDE.md)
+- [Lecture-13-write-the-agent-instructions](Lecture-13-write-the-agent-instructions/LESSON-GUIDE.md)
+- [Lecture-14-review-exact-changes](Lecture-14-review-exact-changes/LESSON-GUIDE.md)
+- [Lecture-15-handle-failures-clearly](Lecture-15-handle-failures-clearly/LESSON-GUIDE.md)
+- [Lecture-16-preserve-conversation-and-bound-execution](Lecture-16-preserve-conversation-and-bound-execution/LESSON-GUIDE.md)
+- [Lecture-17-test-database-behavior](Lecture-17-test-database-behavior/LESSON-GUIDE.md)
+- [Lecture-18-test-the-sdk-approval-lifecycle](Lecture-18-test-the-sdk-approval-lifecycle/LESSON-GUIDE.md)
+- [Lecture-19-evaluate-live-agent-decisions](Lecture-19-evaluate-live-agent-decisions/LESSON-GUIDE.md)
+- [Lecture-20-inspect-receipts-and-audit-history](Lecture-20-inspect-receipts-and-audit-history/LESSON-GUIDE.md)
+- [Lecture-21-prepare-the-application-boundary-for-deployment](Lecture-21-prepare-the-application-boundary-for-deployment/LESSON-GUIDE.md)
+- [Lecture-22-port-the-agent-to-another-framework](Lecture-22-port-the-agent-to-another-framework/LESSON-GUIDE.md)

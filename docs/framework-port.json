@@ -1,0 +1,58 @@
+{
+  "lesson": 20,
+  "title": "Port the agent to another framework",
+  "checkpoint": "Students understand which parts belong to the application and which belong to the SDK.",
+  "applicationOwned": [
+    "PostgreSQL schema",
+    "ProductRepository contract",
+    "strict domain schemas",
+    "tenant and editor policy",
+    "version checks",
+    "atomic audit and receipt transactions",
+    "exact-call replay",
+    "business instructions",
+    "acceptance expectations"
+  ],
+  "frameworkOwned": {
+    "original": "OpenAI Agents SDK 0.21.0: tool parameters, RunContext, Runner, interruptions and RunState approve/reject.",
+    "port": "AI SDK 7.0.173: tool inputSchema, immutable host context closure, generateText, toolApproval policy, approval-request/response messages and responseMessages.",
+    "provider": "@ai-sdk/openai 4.0.118 for optional local provider execution. The configured model remains unchanged."
+  },
+  "preserved": "11 existing schema, domain, repository and deterministic test files remain byte-identical. Instruction text was extracted unchanged into one shared application module.",
+  "acceptanceEvidence": {
+    "sharedScenarios": 31,
+    "sdkExecutionsPerRun": 62,
+    "focusedChecks": 32,
+    "guardedRuns": 2,
+    "localProjectTests": 112,
+    "providerInferenceCalls": 0,
+    "storage": "Production repository with disposable sequential PGlite; generated IDs and timestamps normalized only for business-effect comparison."
+  },
+  "nativeDifferences": {
+    "identityFields": "For all four extra identity fields, OpenAI emits one interruption that host preview rejects; AI SDK rejects the input before emitting an approval request. No repository mutation executes.",
+    "wrongShape": "An array-shaped create input pauses before host rejection in OpenAI; AI SDK rejects it before approval. No stored effect.",
+    "unknownTool": "OpenAI raises ModelBehaviorError. AI SDK returns a tool error and consumes the scripted final continuation. Both execute zero repository mutations."
+  },
+  "sharedOutcomes": [
+    "read tools require no write approval",
+    "valid writes pause before effects",
+    "approve/reject/unclear decisions preserve exact scope",
+    "readers and foreign-tenant references cannot mutate",
+    "strict identity arguments are rejected",
+    "stale writes preserve the competing update",
+    "duplicate SKU and missing products return safe errors",
+    "exact replay adds no second audit or receipt",
+    "later tool calls need a new approval",
+    "audit failure rolls back",
+    "notification failure preserves commit",
+    "model failure after commit leaves stored evidence",
+    "private driver details are not model-visible"
+  ],
+  "commands": {
+    "originalCli": "npm start",
+    "portCli": "npm run start:ai",
+    "comparison": "npm run test:port",
+    "fullCheck": "npm run check"
+  },
+  "scope": "Actual SDK control flow with scripted model output; neutral fixture text is not a live-model answer-quality score. The port remains a local demo CLI. Authenticated service adapters, encrypted durable pending storage, deployed database transport and live model behavior need their own integration/evaluation runs."
+}
